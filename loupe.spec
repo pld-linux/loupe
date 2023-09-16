@@ -3,7 +3,7 @@ Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
 Version:	44.3
-Release:	0.1
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/loupe/44/%{name}-%{version}.tar.xz
@@ -40,10 +40,8 @@ and Rust.
 Loupe to przeglądarka obrazów napisana z użyciem GTK 4, Libadwaita
 oraz języka Rust.
 
-
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %meson build
@@ -55,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-%find_lang %{name}.lang
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,6 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.gnome.Loupe.service
 %{_datadir}/metainfo/org.gnome.Loupe.metainfo.xml
 %{_desktopdir}/org.gnome.Loupe.desktop
-%{_iconsdir}/scalable/apps/org.gnome.Loupe.svg
-%{_iconsdir}/scalable/apps/org.gnome.Loupe.Devel.svg
-%{_iconsdir}/symbolic/apps/org.gnome.Loupe-symbolic.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Loupe.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Loupe.Devel.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Loupe-symbolic.svg
