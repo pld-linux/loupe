@@ -8,6 +8,7 @@ License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/loupe/44/%{name}-%{version}.tar.xz
 # Source0-md5:	06d933b55f4f0ab0dd7b397f3162320e
+Patch0:		%{name}-x32.patch
 URL:		https://gitlab.gnome.org/GNOME/loupe
 BuildRequires:	cargo
 BuildRequires:	gtk4-devel >= 4.11.2
@@ -17,7 +18,7 @@ BuildRequires:	libheif-devel >= 1.14.2
 BuildRequires:	libgweather4-devel >= 4.0.0
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.004
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -30,7 +31,11 @@ Requires:	lcms2 >= 2.12.0
 Requires:	libadwaita >= 1.4
 Requires:	libheif >= 1.14.2
 Requires:	libgweather4 >= 4.0.0
+ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# debugsource packages don't support rust (or require adding some flags to rust/cargo)
+%define		_debugsource_packages	0
 
 %description
 Loupe is an image viewer application written with GTK 4, Libadwaita
@@ -42,8 +47,14 @@ oraz języka Rust.
 
 %prep
 %setup -q
+%ifarch x32
+%patch0 -p1
+%endif
 
 %build
+%ifarch x32
+export PKG_CONFIG_ALLOW_CROSS=1
+%endif
 %meson build
 
 %ninja_build -C build
@@ -51,6 +62,9 @@ oraz języka Rust.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%ifarch x32
+export PKG_CONFIG_ALLOW_CROSS=1
+%endif
 %ninja_install -C build
 
 %find_lang %{name}
