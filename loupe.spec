@@ -2,16 +2,16 @@
 Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
-Version:	44.3
+Version:	45.2
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	https://download.gnome.org/sources/loupe/44/%{name}-%{version}.tar.xz
-# Source0-md5:	06d933b55f4f0ab0dd7b397f3162320e
+Source0:	https://download.gnome.org/sources/loupe/45/%{name}-%{version}.tar.xz
+# Source0-md5:	e490d021eac34bd9d1cb2bffc3c3ba44
 Patch0:		%{name}-x32.patch
 URL:		https://gitlab.gnome.org/GNOME/loupe
 BuildRequires:	cargo
-BuildRequires:	gtk4-devel >= 4.11.2
+BuildRequires:	gtk4-devel >= 4.12.0
 BuildRequires:	lcms2-devel >= 2.12.0
 BuildRequires:	libadwaita-devel >= 1.4
 BuildRequires:	libheif-devel >= 1.14.2
@@ -26,7 +26,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.26
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
-Requires:	gtk4 >= 4.11.2
+Requires:	gtk4 >= 4.12.0
 Requires:	lcms2 >= 2.12.0
 Requires:	libadwaita >= 1.4
 Requires:	libheif >= 1.14.2
@@ -67,7 +67,7 @@ export PKG_CONFIG_ALLOW_CROSS=1
 %endif
 %ninja_install -C build
 
-%find_lang %{name}
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
