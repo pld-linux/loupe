@@ -3,7 +3,7 @@ Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
 Version:	45.2
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/loupe/45/%{name}-%{version}.tar.xz
@@ -14,8 +14,8 @@ BuildRequires:	cargo
 BuildRequires:	gtk4-devel >= 4.12.0
 BuildRequires:	lcms2-devel >= 2.12.0
 BuildRequires:	libadwaita-devel >= 1.4
-BuildRequires:	libheif-devel >= 1.14.2
 BuildRequires:	libgweather4-devel >= 4.0.0
+BuildRequires:	libheif-devel >= 1.14.2
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	rpmbuild(macros) >= 2.004
@@ -25,12 +25,12 @@ BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.26
 Requires(post,postun):	gtk-update-icon-cache
-Requires:	hicolor-icon-theme
 Requires:	gtk4 >= 4.12.0
+Requires:	hicolor-icon-theme
 Requires:	lcms2 >= 2.12.0
 Requires:	libadwaita >= 1.4
-Requires:	libheif >= 1.14.2
 Requires:	libgweather4 >= 4.0.0
+Requires:	libheif >= 1.14.2
 ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,6 +66,8 @@ rm -rf $RPM_BUILD_ROOT
 export PKG_CONFIG_ALLOW_CROSS=1
 %endif
 %ninja_install -C build
+
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
 %find_lang %{name} --with-gnome
 
