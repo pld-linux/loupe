@@ -2,12 +2,12 @@
 Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
-Version:	45.2
-Release:	2
+Version:	45.3
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/loupe/45/%{name}-%{version}.tar.xz
-# Source0-md5:	e490d021eac34bd9d1cb2bffc3c3ba44
+# Source0-md5:	bfd5e246f89fed13d03c4fe96089187f
 Patch0:		%{name}-x32.patch
 URL:		https://gitlab.gnome.org/GNOME/loupe
 BuildRequires:	cargo
