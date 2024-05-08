@@ -2,20 +2,21 @@
 Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
-Version:	45.3
+Version:	46.2
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	https://download.gnome.org/sources/loupe/45/%{name}-%{version}.tar.xz
-# Source0-md5:	bfd5e246f89fed13d03c4fe96089187f
+Source0:	https://download.gnome.org/sources/loupe/46/%{name}-%{version}.tar.xz
+# Source0-md5:	2a351b769e9e3877f22e99bfa86874b2
 Patch0:		%{name}-x32.patch
 URL:		https://gitlab.gnome.org/GNOME/loupe
 BuildRequires:	cargo
-BuildRequires:	gtk4-devel >= 4.12.0
+BuildRequires:	gtk4-devel >= 4.13.6
 BuildRequires:	lcms2-devel >= 2.12.0
 BuildRequires:	libadwaita-devel >= 1.4
 BuildRequires:	libgweather4-devel >= 4.0.0
 BuildRequires:	libheif-devel >= 1.14.2
+BuildRequires:	libseccomp-devel >= 2.5.0
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	rpmbuild(macros) >= 2.004
@@ -25,12 +26,13 @@ BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.26
 Requires(post,postun):	gtk-update-icon-cache
-Requires:	gtk4 >= 4.12.0
+Requires:	gtk4 >= 4.13.6
 Requires:	hicolor-icon-theme
 Requires:	lcms2 >= 2.12.0
 Requires:	libadwaita >= 1.4
 Requires:	libgweather4 >= 4.0.0
 Requires:	libheif >= 1.14.2
+Requires:	libseccomp >= 2.5.0
 ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -89,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS README.md
 %attr(755,root,root) %{_bindir}/loupe
 %{_datadir}/dbus-1/services/org.gnome.Loupe.service
+%{_datadir}/glib-2.0/schemas/org.gnome.Loupe.gschema.xml
 %{_datadir}/metainfo/org.gnome.Loupe.metainfo.xml
 %{_desktopdir}/org.gnome.Loupe.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Loupe.svg
