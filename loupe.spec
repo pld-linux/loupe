@@ -2,12 +2,12 @@
 Summary:	GNOME image viewer
 Summary(pl.UTF-8):	Przeglądarka obrazów dla GNOME
 Name:		loupe
-Version:	47.2
+Version:	47.4
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/loupe/47/%{name}-%{version}.tar.xz
-# Source0-md5:	08ae66d6c53be0f0543688f4272f64ae
+# Source0-md5:	87f55990def218e14a191eeaf4f0c24b
 Patch0:		%{name}-x32.patch
 URL:		https://gitlab.gnome.org/GNOME/loupe
 BuildRequires:	cargo
@@ -18,7 +18,7 @@ BuildRequires:	libgweather4-devel >= 4.0.0
 BuildRequires:	libseccomp-devel >= 2.5.0
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
-BuildRequires:	rpmbuild(macros) >= 2.004
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -48,16 +48,16 @@ oraz języka Rust.
 %prep
 %setup -q
 %ifarch x32
-%patch0 -p1
+%patch -P0 -p1
 %endif
 
 %build
 %ifarch x32
 export PKG_CONFIG_ALLOW_CROSS=1
 %endif
-%meson build
+%meson
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -65,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %ifarch x32
 export PKG_CONFIG_ALLOW_CROSS=1
 %endif
-%ninja_install -C build
+%meson_install
 
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
