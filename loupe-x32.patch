@@ -1,14 +1,14 @@
---- loupe-47.0/src/meson.build.orig	2024-09-13 13:40:16.000000000 +0200
-+++ loupe-47.0/src/meson.build	2024-09-19 21:32:46.081999148 +0200
-@@ -12,6 +12,7 @@ run_command(
- )
+--- loupe-48.1/src/meson.build.orig	2025-04-11 15:06:01.000000000 +0200
++++ loupe-48.1/src/meson.build	2025-05-09 22:00:41.094674411 +0200
+@@ -2,6 +2,7 @@ build_root = meson.project_build_root()
+ source_root = meson.project_source_root()
  
  cargo_options = ['--manifest-path', source_root / 'Cargo.toml']
 +cargo_options += [ '--target', 'x86_64-unknown-linux-gnux32' ]
  cargo_options += ['--target-dir', build_root / 'src']
+ cargo_options += ['--profile', profile]
  
- if get_option('profile') == 'development'
-@@ -53,7 +54,7 @@ custom_target(
+@@ -48,7 +49,7 @@ custom_target(
    output: meson.project_name(),
    command: [
      'cp',
